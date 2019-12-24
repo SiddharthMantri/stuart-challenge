@@ -1,34 +1,33 @@
 import axios from 'axios';
+import { stat } from 'fs';
 
 
 const GET = 'GET';
 const POST = 'POST';
 
-const request = (method, url, data) => {
-    return new Promise((resolve, reject) => {
-        axios({
-            baseURL: 'https://stuart-frontend-challenge.now.sh/',
-            method,
-            url,
-            data
-        }).then((response) => {
-            if (response.status === 200) {
-                resolve(response.data);
-            } else {
-                resolve({
-                    error: 'Incorrect '
-                })
-            }
-        }).catch((error) => {
-            resolve({
-                error
-            });
-        });
+const request = (method, url, params) => new Promise((resolve, reject) => {
+    if (typeof params !== 'object') params = {};
+    const options = {
+        method,
+        url,
+        baseURL: 'https://stuart-frontend-challenge.now.sh/',
+        validateStatus: (status) => status >= 200 && status < 300,
+        ...params,
+    };
+
+    axios.request(options).then((response) => {
+        if (response.status === 200) {
+            resolve(response.data);
+        } else {
+            resolve({ response });
+        }
+    }).catch((error) => {
+        resolve({ error });
     });
-};
+});
 
 const API = {
-    geocode: async (data) => request(POST, 'geocode', data),
+    geocode: async (data) => await request(POST, 'geocode', { data }),
 };
 
 export default API;

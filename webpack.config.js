@@ -32,16 +32,12 @@ module.exports = () => {
                 },
                 {
                     test: /\.css$/i,
+                    loader: 'style-loader!css-loader?modules',
                     exclude: /node_modules/,
-                    use: [
-                        'style-loader',
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                modules: true,
-                            },
-                        },
-                    ],
+                },
+                {
+                    test: /\.svg$/,
+                    use: ['@svgr/webpack'],
                 },
             ]
         },
