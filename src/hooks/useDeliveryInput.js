@@ -1,15 +1,16 @@
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
-import { createRef, useCallback, useState } from 'react';
-import { useAsyncAbortable } from 'react-async-hook';
+import { useCallback, useState, useRef } from 'react';
+import { useAsync } from 'react-async-hook';
 import API from '../api';
 
-const useMyMemo = (fn = () => { }) => {
-    const ref = createRef();
+const useConstant = (fn = () => { }) => {
+    const ref = useRef();
     if (!ref.current) {
-        ref.current = { v: fn() };
+        ref.current = { value: fn() };
     }
-    return ref.current.v;
+    return ref.current.value;
 };
+
 /**
  * Custom hook for handling input
  * @param {string} initialValue Initial value to be set as input value
@@ -19,21 +20,21 @@ const useDeliveryInput = (initialValue = '') => {
     const [isValid, setIsValid] = useState(false);
     const [address, setAddress] = useState(null);
 
-    const geoCodeRequest = () => {
+    const geoCodeRequest = useCallback((searchVal = '') => {
         API.geocode({
-            address: value,
+            address: searchVal,
         }).then((response) => {
-            if (response.error) {
-                setIsValid(false);
-            } else {
+            if (!response.error) {
                 setIsValid(true);
                 setAddress(response);
+            } else {
+                setIsValid(false);
             }
         });
-    };
+    }, []);
 
     const onBlur = () => {
-        geoCodeRequest();
+        geoCodeRequest(value);
     };
 
     const reset = () => {
@@ -42,8 +43,14 @@ const useDeliveryInput = (initialValue = '') => {
         setAddress(null);
     };
 
-    const debouncedSearch = useMyMemo(() => AwesomeDebouncePromise(geoCodeRequest, 500));
-    useAsyncAbortable(() => value.length === 0 ? [] : debouncedSearch(), [value]);
+    const debouncedSearch = useConstant((value) => AwesomeDebouncePromise(geoCodeRequest, 1000));
+    const searchResult = useAsync(async () => {
+        if (value.length === 0) {
+            return {};
+        }
+        return debouncedSearch(value);
+    }, [value]);
+
 
     const onChange = useCallback((e) => {
         setValue(e.target.value);
@@ -51,6 +58,7 @@ const useDeliveryInput = (initialValue = '') => {
             setIsValid(false);
         }
     }, []);
+
     return [value, onChange, isValid, address, onBlur, reset];
 };
 

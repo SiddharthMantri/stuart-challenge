@@ -42,7 +42,7 @@ const AddressBoxPresentation = ({ pickup = '', isValidPickup = false, changePick
                 <Grid container item xs={12} lg={12}>
                     <Grid item xs={1}></Grid>
                     <Grid item xs={11} style={{ paddingLeft: '8px' }}>
-                        <Button onClick={handleOnClick} style={{ width: '100%' }} disabled={disabled}>
+                        <Button id='create-job-btn' onClick={handleOnClick} style={{ width: '100%' }} disabled={disabled}>
                             {!loading ? 'Create Job' : 'Creating...'}
                         </Button>
                     </Grid>
