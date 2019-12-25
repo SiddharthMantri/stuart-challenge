@@ -71,6 +71,7 @@ function GoogleMap(apiKey = '', mapContainer) {
             marker.setMap(null);
             delete this.markerMap[type];
         }
+        return this;
     };
 }
 

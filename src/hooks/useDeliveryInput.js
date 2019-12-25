@@ -47,6 +47,9 @@ const useDeliveryInput = (initialValue = '') => {
 
     const onChange = useCallback((e) => {
         setValue(e.target.value);
+        if (e.target.value === '') {
+            setIsValid(false);
+        }
     }, []);
     return [value, onChange, isValid, address, onBlur, reset];
 };
