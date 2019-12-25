@@ -1,4 +1,6 @@
 
+import PickUpBadgePresent from '../icons/pickUpBadgePresent.svg';
+
 function GoogleMap(apiKey = '', mapContainer) {
     this.map = null;
     const drawMap = () => {
@@ -19,10 +21,11 @@ function GoogleMap(apiKey = '', mapContainer) {
         });
     };
     this.drawMarker = ({ icon, lat, lng }) => {
+        console.log(PickUpBadgePresent)
         let marker = new window.google.maps.Marker({
             position: new window.google.maps.LatLng(lat, lng),
             map: this.map,
-            // icon: '../icons/pickUpBadgeBlank.svg',
+            icon: '../icons/pickUpBadgePresent.svg',
         });
         this.markers.push(marker);
     }

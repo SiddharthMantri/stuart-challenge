@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import TextInput from '../../components/TextInput';
 import useDeliveryInput from '../../hooks/useDeliveryInput';
@@ -11,20 +11,25 @@ import API from '../../api';
 import Context from '../../state/context';
 
 const AddressBox = props => {
-    let [pickup, changePickup, isValidPickup] = useDeliveryInput('');
-    let [dropoff, changeDropoff, isValidDropOff] = useDeliveryInput('');
-    const { state } = useContext(Context);
+    const [pickup, changePickup, isValidPickup] = useDeliveryInput('');
+    const [dropoff, changeDropoff, isValidDropOff] = useDeliveryInput('');
+    const { state, toast } = useContext(Context);
+    const { showToast = () => { } } = toast;
     const { drawMarker, addMarker, clearMap } = state;
+    const [loading, setLoading] = useState(false);
 
     const handleOnClick = () => {
-        API.geocode({ address: '29 Rue du 4 Septembre' })
-            .then(({ latitude: lat, longitude: lng }) => {
-                drawMarker({
-                    icon: '',
-                    lat,
-                    lng,
-                });
+        setLoading(true);
+        API.geocode({ address: '29 Rue du 4 Septembre' }).then(({ address = '', latitude: lat, longitude: lng }) => {
+            setLoading(false);
+            drawMarker({
+                icon: PickUpBadgePresent,
+                lat,
+                lng,
             });
+        });
+
+        showToast();
     };
 
     return (
@@ -51,7 +56,7 @@ const AddressBox = props => {
                         <Grid item xs={1}></Grid>
                         <Grid item xs={11}>
                             <Button onClick={handleOnClick} style={{ width: '100%' }}>
-                                Create Job
+                                {!loading ? 'Create Job' : 'Creating...'}
                             </Button>
                         </Grid>
                     </Grid>
