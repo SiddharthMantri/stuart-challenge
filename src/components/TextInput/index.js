@@ -3,17 +3,16 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styles from './input.module.css';
 
-const TextInput = ({ value = '', onChange = () => { }, placeholder = '', id = '', style = {} }) => (
-    <Fragment>
-        <input
-            className={styles['address-input']}
-            id={id}
-            onChange={onChange}
-            value={value}
-            placeholder={placeholder}
-            style={style}
-        />
-    </Fragment>
+const TextInput = ({ value = '', onChange = () => { }, placeholder = '', id = '', style = {}, onBlur = () => { } }) => (
+    <input
+        className={styles['address-input']}
+        id={id}
+        onChange={onChange}
+        value={value}
+        placeholder={placeholder}
+        style={style}
+        onBlur={onBlur}
+    />
 );
 
 TextInput.propTypes = {
@@ -22,6 +21,7 @@ TextInput.propTypes = {
     placeholder: PropTypes.string,
     id: PropTypes.string,
     style: PropTypes.object,
+    onBlur: PropTypes.func,
 };
 
 export default TextInput;

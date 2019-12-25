@@ -8,7 +8,6 @@ const Provider = ({ children }) => {
     const { state } = useMap('AIzaSyDmvHzsfND8c39HNI95OiahLJ7bRyXBKkA');
     const [open, showToast, closeToast] = useToast();
     const toast = { open, showToast, closeToast };
-
     return (
         <Context.Provider value={{ state, toast }}>
             {children}

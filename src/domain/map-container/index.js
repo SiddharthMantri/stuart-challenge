@@ -2,12 +2,15 @@
 import React, { useContext } from 'react';
 import styles from './style.css';
 import Context from '../../state/context';
+import MapError from './map.error';
 
-const MapContainer = ({ apiKey = '', options = {}, children }) => {
+const MapContainer = () => {
     const { state } = useContext(Context);
-    const { mapContainer, markers = [] } = state;
+    const { mapContainer } = state;
     return (
-        <div className={styles.mapContainer} ref={mapContainer} id="delivery-map" />
+        <MapError>
+            <div className={styles.mapContainer} ref={mapContainer} id="delivery-map" />
+        </MapError>
     );
 };
 

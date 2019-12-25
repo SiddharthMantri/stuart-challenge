@@ -1,12 +1,14 @@
 /* eslint-disable no-use-before-define */
-import { useState, createRef } from 'react';
+import { useState, createRef, useMemo } from 'react';
 import GoogleMap from '../models/GoogleMap';
 
 const useMap = (key = '') => {
     const mapContainer = createRef();
-    const googleMap = new GoogleMap(key, mapContainer);
+    const googleMap = useMemo(() => new GoogleMap(key, mapContainer), []);
     const {
-        map, apiKey = '', markers = [], addMarker = () => { }, clearMarker = () => { }, drawMarker = () => { }, clearMap = () => { }
+        map, apiKey = '', markers = [], addMarker = () => { }, clearMarker = () => { }, drawMarker = () => { }, clearMap = () => { },
+        clearByType = () => { },
+        markerMap = {},
     } = googleMap;
 
     const update = (fn = () => { }) => (args) => {
@@ -20,10 +22,12 @@ const useMap = (key = '') => {
         mapContainer,
         apiKey,
         markers,
+        markerMap,
         drawMarker: update(drawMarker),
         addMarker: update(addMarker),
         clearMarker: update(clearMarker),
         clearMap: update(clearMap),
+        clearByType: update(clearByType),
     };
 
     const [state, setState] = useState(defaultState);

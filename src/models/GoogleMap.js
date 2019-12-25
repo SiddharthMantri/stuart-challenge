@@ -1,13 +1,26 @@
-
-import PickUpBadgePresent from '../icons/pickUpBadgePresent.svg';
-
 function GoogleMap(apiKey = '', mapContainer) {
     this.map = null;
+    this.markerMap = {};
+    const icons = {
+        pickup: '../icons/pickUpMarker.svg',
+        dropoff: '../icons/dropOffMarker.svg',
+    };
+
+    // private method to draw a map given a map ref
     const drawMap = () => {
-        this.map = new window.google.maps.Map(mapContainer.current, { zoom: 14, center: { lat: 48.85, lng: 2.35 }, disableDefaultUI: true, draggable: false });
-    }
+        this.map = new window.google.maps.Map(
+            mapContainer.current, {
+                zoom: 14,
+                center: { lat: 48.85, lng: 2.35 },
+                disableDefaultUI: true,
+                draggable: false,
+            },
+        );
+    };
+
+    // private method to load google maps api into a script tag
     const loadScript = (key = '') => {
-        if (window.google) {
+        if (window.google || this.map !== null) {
             return;
         }
         const script = document.createElement('script');
@@ -20,26 +33,28 @@ function GoogleMap(apiKey = '', mapContainer) {
             drawMap();
         });
     };
-    this.drawMarker = ({ icon, lat, lng }) => {
-        console.log(PickUpBadgePresent)
-        let marker = new window.google.maps.Marker({
+
+    this.drawMarker = ({ type, icon, lat, lng }) => {
+        const marker = new window.google.maps.Marker({
             position: new window.google.maps.LatLng(lat, lng),
             map: this.map,
-            icon: '../icons/pickUpBadgePresent.svg',
+            icon: {
+                url: icons[type],
+            },
         });
         this.markers.push(marker);
-    }
+        this.markerMap[type] = marker;
+    };
+
     const initialize = (key = '') => {
         loadScript(key);
     };
     initialize(apiKey);
     this.apiKey = apiKey;
     this.markers = [];
-    this.addMarker = ({ latitude = 0.0, longitude = 0.0 }) => {
 
-    };
-    this.clearMarker = () => {
-        this.markers = [];
+    this.clearMarker = ({ lat = 0.0, lng = 0.0 }) => {
+
     };
     this.updateMap = ({ map = {} }) => {
 
@@ -50,7 +65,13 @@ function GoogleMap(apiKey = '', mapContainer) {
         });
         this.markers = [];
     };
-
+    this.clearByType = ({ type }) => {
+        const marker = this.markerMap[type];
+        if (marker) {
+            marker.setMap(null);
+            delete this.markerMap[type];
+        }
+    };
 }
 
 export default GoogleMap;

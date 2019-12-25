@@ -28,6 +28,7 @@ const request = (method, url, params) => new Promise((resolve, reject) => {
 
 const API = {
     geocode: async (data) => await request(POST, 'geocode', { data }),
+    createJob: async (data) => await request(POST, 'jobs', { data }),
 };
 
 export default API;

@@ -4,7 +4,10 @@ import styles from './button.module.css';
 
 
 const Button = ({ onClick = () => { }, disabled = false, style = {}, children }) => (
-    <button className={styles['address-button']} onClick={onClick} disabled={disabled} style={style}>
+    <button className={styles['address-button']} onClick={onClick} disabled={disabled} style={{
+        ...style,
+        opacity: disabled ? '50%' : '100%',
+    }}>
         {children}
     </button>
 );

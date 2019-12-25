@@ -3,12 +3,15 @@ import { Container, Grid } from '@material-ui/core';
 import AddressBox from '../address-box';
 import MapContainer from '../map-container';
 import Toast from '../Toast';
+import MapOverlay from '../map-overlay';
 
 const DeliveryHome = () => (
     <Grid container>
-        <MapContainer apiKey="AIzaSyDmvHzsfND8c39HNI95OiahLJ7bRyXBKkA" />
-        <AddressBox />
-        <Toast />
+        <MapContainer />
+        <MapOverlay>
+            <AddressBox />
+            <Toast />
+        </MapOverlay>
     </Grid>
 );
 
