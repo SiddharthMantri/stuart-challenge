@@ -22,7 +22,7 @@ const useMap = (key = '') => {
     } = googleMap;
 
     /**
-     * Helper method that gets a Fn and its arguments
+     * Helper method that gets a Function and its arguments
      * Triggers the function with passed arguments and forces state update
      */
     const update = (fn = () => { }) => (args) => {
