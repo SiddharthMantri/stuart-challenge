@@ -12,7 +12,7 @@ The main library powering the UI:
 Design library used
   - Material-UI
 
-Note - I have used the Material UI design library purely to implement the flexbox grid system. I have not used any component from that library apart from `Grid`.
+##### Note - I have used the Material UI design library purely to implement the flexbox grid system. I have not used any component from that library apart from `Grid`.
 
 Initially, I thought about adding redux but felt that writing my own provider and hooks into GoogleMap would be much simpler given the size of the project.
 
@@ -69,7 +69,7 @@ Since i've used the Provider pattern, the App structure is pretty simple
     - Implemented bonus implementation of not using `create-react-app` and I've used my own `webpack` and `babel` config
 - Step 2
     - Implemented onBlur of input field as shown in `useDeliveryInput` hook
-    - Same hook also provides a 1/2 second debounce to perform a geocode request on stopping type
+    - Same hook also provides a 1 second debounce to perform a geocode request on stopping to type
     - Marker appears on correct address
     - Icon colors change on correct/incorrect address
 - Step 3
@@ -79,16 +79,18 @@ Since i've used the Provider pattern, the App structure is pretty simple
     - On successful submission, a toaster appears and the map resets
     - Toast can be cleared by clicking on it
     - Bonus completed, toast disappears after 5 seconds
+- Step 5
+    - Expanded on this below in the last section
 
 
 ### Development choices / Creative liberties
-
 
 - Specifically not used `redux` or `react-redux` in this application. I feel that by writing my own state hooks and provider, i've reduced the size of the application compared to if I'd have used `redux`.
 - In interest of time, I've used Material-UI but if I had enough time to implement a flexbox grid, I'd have created my own
 - I decided against using a ready-made library for Google Maps in React. This was done more as a challenge to myself as well as showcasing what is possible without adding a whole bunch of boilerplate code.
 - The design specifications did not specify a width for the address card. So I have set it as 25% of the container on large screens with it scaling up to 100% of the container on smaller screens.
-- The Map itself has been centered to roughly the center of the two addresses that are valid for this scenario. To expand this app, I would keep the map to scale between the two points when added to the map
+- The Map itself has been centered to roughly the center of the two addresses that are valid for this scenario. To expand this app, I would keep the map to scale between the two points when added to the map.
+- Disabled all interaction with the map for a user. Did this as it isn't required in this case but it could be added without issues
 
 
 ### Testing strategy
@@ -134,3 +136,4 @@ I feel that I should explain my coding choices for creating this app.
 - Improve the useMaps hook to extend almost all GMaps functionality in to a usable React hook.
     - In general, I would package the MapContainer and useMap hook into a single package and use that in place of any currently available react libraries as that would give me full control over the application and its code
 - Improve Error handling. I would create specific error boundary components for each component as well as larger domain level components that I can then use to have the correct state of the app and any errors be handled correctly.
+- Allow users to interact with the map if required for onClick geocoding of addresses
