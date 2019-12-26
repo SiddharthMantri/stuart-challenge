@@ -75,6 +75,8 @@ Since I've used the Provider pattern, the App structure is pretty simple
     - Implemented bonus: same hook also provides a 1 second debounce to perform a geocode request on stopping to type
     - Marker appears on correct address
     - Icon colors change on correct/incorrect address
+    - I noticed that the API also validates all requests if the initial string is correct. For example,
+        - 15 rue de Bourgogne and 15 rue de bourgogneaaaa are both valid responses from the API.
 - Step 3
     - On click, button sends a request to create a Stuart job
     - Bonus completed, while waiting for response label shows `Creating...`

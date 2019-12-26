@@ -44,15 +44,21 @@ function GoogleMap(apiKey = '', mapContainer) {
     };
 
     this.drawMarker = ({ type, lat, lng }) => {
-        const marker = new window.google.maps.Marker({
-            position: new window.google.maps.LatLng(lat, lng),
-            map: this.map,
-            icon: {
-                url: icons[type],
-            },
-        });
-        this.markers.push(marker);
-        this.markerMap[type] = marker;
+        const filteredMarker = this.markers.find((marker) => marker.get('type') === type);
+        if (filteredMarker === undefined || filteredMarker === null) {
+            const marker = new window.google.maps.Marker({
+                position: new window.google.maps.LatLng(lat, lng),
+                map: this.map,
+                icon: {
+                    url: icons[type],
+                },
+            });
+            marker.setValues({ type });
+
+            this.markers = [...this.markers, marker];
+            this.markerMap = { ...this.markerMap, [type]: marker };
+        }
+        return this.status(this);
     };
 
     this.clearMap = () => {
@@ -60,14 +66,19 @@ function GoogleMap(apiKey = '', mapContainer) {
             marker.setMap(null);
         });
         this.markers = [];
+        return this.status(this);
     };
     this.clearByType = ({ type }) => {
-        const marker = this.markerMap[type];
-        if (marker) {
+        let marker = this.markers.find((marker) => marker.get('type') === type);
+        if (marker !== undefined && marker !== null) {
             marker.setMap(null);
-            delete this.markerMap[type];
+            marker = null;
         }
-        return this;
+        return this.status(this);
+    };
+    this.status = (mapState = {}) => {
+        const clone = Object.assign(Object.create(Object.getPrototypeOf(this)), this);
+        return clone;
     };
     initialize(apiKey);
 }

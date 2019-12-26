@@ -18,6 +18,7 @@ const useMap = (key = '') => {
         clearMap = () => { },
         clearByType = () => { },
         markerMap = {},
+        status = () => { },
     } = googleMap;
 
     /**
@@ -26,8 +27,9 @@ const useMap = (key = '') => {
      */
     const update = (fn = () => { }) => (args) => {
         fn(args);
-        const newState = { ...defaultState };
-        setState({ ...newState });
+        // const newState = { ...defaultState };
+        const newState = status({ ...defaultState });
+        setState({ ...defaultState, ...newState });
     };
 
     // Initial state of the hook, contains the required keys from the GoogleMap class

@@ -17,6 +17,10 @@ import API from '../../api';
 import styles from './address.module.css';
 import AddressError from './address.error';
 
+
+const PICKUP = 'pickup';
+const DROPOFF = 'dropoff';
+
 const AddressBoxPresentation = ({ pickup = '', isValidPickup = false, changePickup = () => { }, onPickupBlur = () => { }, dropoff = '', isValidDropOff = false, changeDropoff = () => { }, onDropoffBlur = () => { }, loading = false, handleOnClick = () => { }, disabled = true }) => (
     <Grid container item lg={3} sm={12} xs={12} md={6}>
         <Card>
@@ -103,6 +107,12 @@ const AddressBox = () => {
             setDisabled(true);
             setLoading(false);
         }
+        if (!isValidPickup) {
+            clearByType({ type: PICKUP });
+        }
+        if (!isValidDropOff) {
+            clearByType({ type: DROPOFF });
+        }
     }, [isValidDropOff, isValidPickup]);
 
     useEffect(() => {
@@ -111,7 +121,7 @@ const AddressBox = () => {
                 longitude: lng,
                 latitude: lat,
             } = pickupAddress;
-            drawMarker({ type: 'pickup', lat, lng });
+            drawMarker({ type: PICKUP, lat, lng });
         }
     }, [pickupAddress]);
     useEffect(() => {
@@ -120,7 +130,7 @@ const AddressBox = () => {
                 longitude: lng,
                 latitude: lat
             } = dropOffAddress;
-            drawMarker({ type: 'dropoff', lat, lng });
+            drawMarker({ type: DROPOFF, lat, lng });
         }
     }, [dropOffAddress]);
 
@@ -130,10 +140,10 @@ const AddressBox = () => {
             setLoading(false);
         }
         if (pickup.length === 0) {
-            clearByType({ type: 'pickup' });
+            clearByType({ type: PICKUP });
         }
         if (dropoff.length === 0) {
-            clearByType({ type: 'dropoff' });
+            clearByType({ type: DROPOFF });
         }
         if (pickup.length === 0 && dropoff.length === 0) {
             clearMap();
