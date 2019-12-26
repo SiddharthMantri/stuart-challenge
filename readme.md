@@ -18,8 +18,8 @@ Initially, I thought about adding redux but felt that writing my own provider an
 
 ### Installation
 
-One way to run this locally would be to clone this application using git and then running it with npm
-The project requires - Node v10.16 for it to run locally.
+One way to run this locally would be to clone this application using git and then running it with npm.
+The project requires - Node v10.16 or greater for it to run locally.
 
 ```sh
 $ git clone https://github.com/SiddharthMantri/stuart-challenge.git
@@ -44,7 +44,7 @@ The `src` folder is composed of the main parts of the app - Api, Components, Dom
 
 ### App Structure
 
-Since i've used the Provider pattern, the App structure is pretty simple
+Since I've used the Provider pattern, the App structure is pretty simple
 
 ```sh
 <ReactContextProvider value={mapState, toastState}>
@@ -72,7 +72,7 @@ Since i've used the Provider pattern, the App structure is pretty simple
     - Implemented bonus implementation of not using `create-react-app` and I've used my own `webpack` and `babel` config
 - Step 2
     - Implemented onBlur of input field as shown in `useDeliveryInput` hook
-    - Same hook also provides a 1 second debounce to perform a geocode request on stopping to type
+    - Implemented bonus: same hook also provides a 1 second debounce to perform a geocode request on stopping to type
     - Marker appears on correct address
     - Icon colors change on correct/incorrect address
 - Step 3
@@ -88,7 +88,7 @@ Since i've used the Provider pattern, the App structure is pretty simple
 
 ### Development choices / Creative liberties
 
-- Specifically not used `redux` or `react-redux` in this application. I feel that by writing my own state hooks and provider, i've reduced the size of the application compared to if I'd have used `redux`.
+- Specifically not used `redux` or `react-redux` in this application. I feel that by writing my own state hooks and provider, I've reduced the size of the application compared to if I'd have used `redux`.
 - In interest of time, I've used Material-UI but if I had enough time to implement a flexbox grid, I'd have created my own
 - I decided against using a ready-made library for Google Maps in React. This was done more as a challenge to myself as well as showcasing what is possible without adding a whole bunch of boilerplate code.
 - The design specifications did not specify a width for the address card. So I have set it as 25% of the container on large screens with it scaling up to 100% of the container on smaller screens.
@@ -99,14 +99,18 @@ Since i've used the Provider pattern, the App structure is pretty simple
 ### Testing strategy
 I remember we spoke about Cypress and integration testing in our call. I wanted to showcase some of the uses of Cypress and why I feel integration testing is much better suited to React apps. 
 
+All tests are available under `cypress/integration`
+
 To run the test suites:
 
 ```sh
 $ git clone https://github.com/SiddharthMantri/stuart-challenge.git
 $ cd stuart-challenge
 $ npm install
+$ npm start
 $ npx cypress open
 ```
+
 This will open the Cypress application and run the tests in cypress/integration. Cypress can also run in the command line and to see this, you can run `npx cypress run`
 
 ##### Note
