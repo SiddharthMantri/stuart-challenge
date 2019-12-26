@@ -44,8 +44,8 @@ function GoogleMap(apiKey = '', mapContainer) {
     };
 
     this.drawMarker = ({ type, lat, lng }) => {
-        const filteredMarker = this.markers.find((marker) => marker.get('type') === type);
-        if (filteredMarker === undefined || filteredMarker === null) {
+        const index = this.markers.findIndex((marker) => marker.get('type') === type);
+        if (index < 0) {
             const marker = new window.google.maps.Marker({
                 position: new window.google.maps.LatLng(lat, lng),
                 map: this.map,
@@ -54,7 +54,6 @@ function GoogleMap(apiKey = '', mapContainer) {
                 },
             });
             marker.setValues({ type });
-
             this.markers = [...this.markers, marker];
             this.markerMap = { ...this.markerMap, [type]: marker };
         }
@@ -69,10 +68,15 @@ function GoogleMap(apiKey = '', mapContainer) {
         return this.status(this);
     };
     this.clearByType = ({ type }) => {
-        let marker = this.markers.find((marker) => marker.get('type') === type);
-        if (marker !== undefined && marker !== null) {
+        const index = this.markers.findIndex((marker) => marker.get('type') === type);
+        if (index > -1) {
+            let marker = this.markers[index];
             marker.setMap(null);
             marker = null;
+            this.markers.splice(index, 1);
+            this.markers = [...this.markers];
+            delete this.markerMap[type];
+            this.markerMap = { ...this.markerMap };
         }
         return this.status(this);
     };
