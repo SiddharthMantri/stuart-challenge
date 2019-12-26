@@ -14,38 +14,40 @@ import DropOffBadgePresent from '../../icons/dropOffBadgePresent.svg';
 import DropOffBadgeError from '../../icons/dropOffBadgeError.svg';
 import Context from '../../state/context';
 import API from '../../api';
-
+import styles from './address.module.css';
 
 const AddressBoxPresentation = ({ pickup = '', isValidPickup = false, changePickup = () => { }, onPickupBlur = () => { }, dropoff = '', isValidDropOff = false, changeDropoff = () => { }, onDropoffBlur = () => { }, loading = false, handleOnClick = () => { }, disabled = true }) => (
     <Grid container item lg={3} sm={12} xs={12} md={6}>
         <Card>
             <Grid container>
-                <Grid container item xs={12} lg={12}>
-                    <Grid item xs={1}>
+                <Grid container item xs={12} lg={12} style={{ maxHeight: '32px', marginBottom: '16px' }}>
+                    <div className={styles['input-icon']}>
                         {pickup === '' ? <PickUpBadgeBlankIcon /> : isValidPickup ? <PickUpBadgePresent /> : <PickUpBadgeError />}
-                    </Grid>
-                    <Grid item xs={11} style={{ paddingLeft: '8px' }}>
+                    </div>
+                    <div className={styles['input-text']}>
                         <TextInput id='pickup-address' value={pickup} onChange={changePickup} placeholder="Pick up address"
                             style={{ marginBottom: '16px', width: '100%' }}
                             onBlur={onPickupBlur}
                         />
-                    </Grid>
+                    </div>
                 </Grid>
-                <Grid container item xs={12} lg={12}>
-                    <Grid item xs={1}>
+                <Grid container item xs={12} lg={12} style={{ maxHeight: '32px', marginBottom: '16px' }}>
+                    <div className={styles['input-icon']}>
                         {dropoff === '' ? <DropOffBadgeBlankIcon /> : isValidDropOff ? <DropOffBadgePresent /> : <DropOffBadgeError />}
-                    </Grid>
-                    <Grid item xs={11} style={{ paddingLeft: '8px' }}>
-                        <TextInput id='dropoff-address' value={dropoff} onChange={changeDropoff} placeholder="Drop off address" style={{ marginBottom: '16px', width: '100%' }} />
-                    </Grid>
+                    </div>
+                    <div className={styles['input-text']}>
+                        <TextInput id='dropoff-address' value={dropoff} onChange={changeDropoff} placeholder="Drop off address"
+                            style={{ marginBottom: '16px', width: '100%' }}
+                        />
+                    </div>
                 </Grid>
                 <Grid container item xs={12} lg={12}>
-                    <Grid item xs={1}></Grid>
-                    <Grid item xs={11} style={{ paddingLeft: '8px' }}>
+                    <div className={styles['input-icon']}></div>
+                    <div className={styles['input-text']}>
                         <Button id='create-job-btn' onClick={handleOnClick} style={{ width: '100%' }} disabled={disabled}>
                             {!loading ? 'Create Job' : 'Creating...'}
                         </Button>
-                    </Grid>
+                    </div>
                 </Grid>
             </Grid>
         </Card >

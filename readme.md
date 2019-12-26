@@ -27,7 +27,7 @@ $ cd stuart-challenge
 $ npm install
 $ npm start
 ```
-This will open a browser at http://localhost:8000/`
+This will open a browser at http://localhost:8000/
 
 
 ### File Structure
@@ -38,6 +38,58 @@ The `src` folder is composed of 4 main parts of the app - Api, Components, Domai
 - hooks - contains three custom hooks that hook onto the app state and are used in the state provider.
 - models - contains the GoogleMap view model that are used for the UI.
 - state - contains the provider and context that use the hooks to provide data throughout the component tree.
+
+### App Structure
+
+Since i've used the Provider pattern, the App structure is pretty simple
+
+```sh
+<ReactContextProvider value={mapState, toastState}>
+    <DeliveryHome>
+        <MapContainer /> 
+        <MapOverlay>
+            <AddressBox />
+            <Toast />
+        </MapOverlay>
+    </DeliveryHome>
+</ReactContextProvider>
+```
+
+- The ContextProvider provides the state information of the app to the entire structure where I have used `useContext` wherever required to access this state.
+- MapContainer is a standalone component that renders the Google Map canvas a fullscreen absolute positioned div.
+    - The markers are directly drawn on the canvas using the useMap hook
+- The MapOverlay is a div positioned on top of the MapContainer that will contain the address box and toast
+- AddressBox contains the inputs and button which accesses the map state in order to draw on it if the input is valid
+- Toast is the success message on job creation and is also accessing the state of the app because it needs to know when the job is created successfully.
+
+### Requisites completed
+
+- Step 1 
+    - I have implemented the design as specified in the design specifications
+    - Implemented bonus implementation of not using `create-react-app` and I've used my own `webpack` and `babel` config
+- Step 2
+    - Implemented onBlur of input field as shown in `useDeliveryInput` hook
+    - Same hook also provides a 1/2 second debounce to perform a geocode request on stopping type
+    - Marker appears on correct address
+    - Icon colors change on correct/incorrect address
+- Step 3
+    - On click, button sends a request to create a Stuart job
+    - Bonus completed, while waiting for response label shows `Creating...`
+- Step 4
+    - On successful submission, a toaster appears and the map resets
+    - Toast can be cleared by clicking on it
+    - Bonus completed, toast disappears after 5 seconds
+
+
+### Development choices / Creative liberties
+
+
+- Specifically not used `redux` or `react-redux` in this application. I feel that by writing my own state hooks and provider, i've reduced the size of the application compared to if I'd have used `redux`.
+- In interest of time, I've used Material-UI but if I had enough time to implement a flexbox grid, I'd have created my own
+- I decided against using a ready-made library for Google Maps in React. This was done more as a challenge to myself as well as showcasing what is possible without adding a whole bunch of boilerplate code.
+- The design specifications did not specify a width for the address card. So I have set it as 25% of the container on large screens with it scaling up to 100% of the container on smaller screens.
+- The Map itself has been centered to roughly the center of the two addresses that are valid for this scenario. To expand this app, I would keep the map to scale between the two points when added to the map
+
 
 ### Testing strategy
 I remember we spoke about Cypress and integration testing in our call. I wanted to showcase some of the uses of Cypress and why I feel integration testing is much better suited to React apps. 
@@ -61,7 +113,7 @@ I feel that I should explain my coding choices for creating this app.
 - GoogleMap.js
     - I consider this as the main class that I've used for implementing the Google Maps JS API
 - useMap.js
-    - Provides stateful hooks into GoogleMap.js that I've used to implement all of the Maps functionality in a React way.
+    - Provides stateful hooks into GoogleMap.js that I've used to implement all of the required Maps functionality in a React way.
 - useDeliveryInput.js
     - From the specifications, the input fields for the user both perform the same set of tasks
         - Search on finishing to type
@@ -74,36 +126,8 @@ I feel that I should explain my coding choices for creating this app.
     - Really simple stateful hook to display and hide the toast on success. 
     - I use it to pass the state of the toast to the general app and then access it wherever needed.
 
-### Requisites completed
 
-- Step 1 
-    - I have implemented the design as specified in the design specifications
-    - Implemented bonus implementation of not using `create-react-app` and I've used my own `webpack` and `babel` config
-- Step 2
-    - Implemented onBlur of input field as shown in `useDeliveryInput` hook
-    - Same hook also provides a 1/2 second debounce to perform a geocode request on stopping type
-    - Marker appears on correct address
-    - Icon colors change on correct/incorrect address
-- Step 3
-    - On click, button sends a request to create a Stuart job
-    - Bonus completed, while waiting for response label shows `Creating...`
-- Step 4
-    - On successful submission, a toaster appears and the map resets
-    - Toast can be cleared by clicking on it
-    - Bonus completed, toast disappears after 5 seconds
-
-
-
-### Development choices
-
-
-- Specifically not used `redux` or `react-redux` in this application. I feel that by writing my own state hooks and provider, i've reduced the size of the application compared to if I'd have used `redux`.
-- In interest of time, I've used Material-UI but if I had enough time to implement a flexbox grid, I'd have created my own
-- I decided against using a ready-made library for Google Maps in React. This was done more as a challenge to myself as well as showcasing what is possible without adding a whole bunch of boilerplate code.
-
-
-
-
-### Future improvements
+### Future improvements (Step 5)
 - Have a `loading` state that waits for the GMaps API to load completely
-- 
+- Improve the useMaps hook to extend almost all GMaps functionality in to a usable React hook.
+    - In general, I would package the MapContainer and useMap hook into a single package and use that in place of any currently available react libraries as that would give me full control over the application and its code

@@ -5,13 +5,13 @@ function GoogleMap(apiKey = '', mapContainer) {
         pickup: '../icons/pickUpMarker.svg',
         dropoff: '../icons/dropOffMarker.svg',
     };
-
     // private method to draw a map given a map ref
     const drawMap = () => {
+        const [lat, lng] = [48.8642127, 2.3227858];
         this.map = new window.google.maps.Map(
             mapContainer.current, {
-                zoom: 14,
-                center: { lat: 48.85, lng: 2.35 },
+                zoom: 15,
+                center: { lat, lng },
                 disableDefaultUI: true,
                 draggable: false,
             },
@@ -53,14 +53,8 @@ function GoogleMap(apiKey = '', mapContainer) {
     this.apiKey = apiKey;
     this.markers = [];
 
-    this.clearMarker = ({ lat = 0.0, lng = 0.0 }) => {
-
-    };
-    this.updateMap = ({ map = {} }) => {
-
-    };
     this.clearMap = () => {
-        this.markers.forEach(marker => {
+        this.markers.forEach((marker) => {
             marker.setMap(null);
         });
         this.markers = [];

@@ -6,17 +6,15 @@ const useMap = (key = '') => {
     const mapContainer = createRef();
     const googleMap = useMemo(() => new GoogleMap(key, mapContainer), []);
     const {
-        map, apiKey = '', markers = [], addMarker = () => { }, clearMarker = () => { }, drawMarker = () => { }, clearMap = () => { },
+        map, apiKey = '', markers = [], drawMarker = () => { }, clearMap = () => { },
         clearByType = () => { },
         markerMap = {},
     } = googleMap;
-
     const update = (fn = () => { }) => (args) => {
         fn(args);
         const newState = { ...defaultState };
         setState({ ...newState });
     };
-
     const defaultState = {
         map,
         mapContainer,
@@ -24,14 +22,10 @@ const useMap = (key = '') => {
         markers,
         markerMap,
         drawMarker: update(drawMarker),
-        addMarker: update(addMarker),
-        clearMarker: update(clearMarker),
         clearMap: update(clearMap),
         clearByType: update(clearByType),
     };
-
     const [state, setState] = useState(defaultState);
-
     return { state };
 };
 

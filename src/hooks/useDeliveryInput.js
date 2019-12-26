@@ -12,7 +12,7 @@ const useConstant = (fn = () => { }) => {
 };
 
 /**
- * Custom hook for handling input
+ * Custom hook for handling input and validating against the API
  * @param {string} initialValue Initial value to be set as input value
  */
 const useDeliveryInput = (initialValue = '') => {
