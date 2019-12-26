@@ -1,4 +1,3 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const dotenv = require('dotenv');
 
@@ -51,14 +50,8 @@ module.exports = () => {
             compress: true,
             port: 8000,
             hot: true,
-            historyApiFallback: true
+            historyApiFallback: true,
         },
         devtool: 'inline-source-map',
-        plugins: [
-            new HtmlWebPackPlugin({
-                template: "./build/index.html",
-                filename: "./index.html"
-            })
-        ]
     }
 }

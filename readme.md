@@ -39,8 +39,21 @@ The `src` folder is composed of 4 main parts of the app - Api, Components, Domai
 - models - contains the GoogleMap view model that are used for the UI.
 - state - contains the provider and context that use the hooks to provide data throughout the component tree.
 
-The src folder also contains `__tests__` which contain some simple tests to make sure the app is working as intended. 
+### Testing strategy
+I remember we spoke about Cypress and integration testing in our call. I wanted to showcase some of the uses of Cypress and why I feel integration testing is much better suited to React apps. 
 
+To run the test suites:
+
+```sh
+$ git clone https://github.com/SiddharthMantri/stuart-challenge.git
+$ cd stuart-challenge
+$ npm install
+$ npx cypress open
+```
+This will open the Cypress application and run the tests in cypress/integration. Cypress can also run in the command line and to see this, you can run `npx cypress run`
+
+##### Note
+I have not tested the Google Maps API. As per Cypress, it is Anti-Pattern to try and interact with sites or servers we do not control. Since the map is rendered as a frame, I haven't specifically tested the map but I have tested if the map loads correctly. 
 
 ### Main Ideas
 I feel that I should explain my coding choices for creating this app.
@@ -55,7 +68,7 @@ I feel that I should explain my coding choices for creating this app.
         - Search on blur
         - Set address on map if correct
     - By definition of a custom hook, I've extracted the reusable behavior of the two inputs into a custom hook that does all of this for me. 
-    - I have created a 'myMemo' hook that creates a memo-ized hook that semantically guarantees a value just once, which is something that isn't guaranteed by useMemo.
+    - I have created a 'useConstant' hook that creates a memo-ized hook that guarantees a value just once, which is something that isn't guaranteed by useMemo.
     - I used some inspirations from AwesomeDebounce to create a debounced hook that performs the search, validates the input, validates the address as well as returns the geocoded address to the map
 - useToast.js
     - Really simple stateful hook to display and hide the toast on success. 

@@ -34,7 +34,9 @@ const useDeliveryInput = (initialValue = '') => {
     }, []);
 
     const onBlur = () => {
-        geoCodeRequest(value);
+        if (value.length !== 0) {
+            geoCodeRequest(value);
+        }
     };
 
     const reset = () => {

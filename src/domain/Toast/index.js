@@ -7,7 +7,7 @@ const Toast = () => {
     const { open, closeToast = () => { } } = toast;
     return (
         <Fragment>
-            {open ? <div className={styles.toast} onClick={closeToast}>
+            {open ? <div className={styles.toast} onClick={closeToast} id={'delivery-toast'}>
                 <p className={styles.text}>Job has been created successfully!</p>
             </div> : null}
         </Fragment>

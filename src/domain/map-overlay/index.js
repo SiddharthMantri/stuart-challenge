@@ -16,7 +16,7 @@ const MapOverlay = ({ children }) => (
 );
 
 MapOverlay.propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node,
 };
 
 export default MapOverlay;

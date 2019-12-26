@@ -7,4 +7,9 @@
     outline: none;
     padding-left: 8px;
     box-sizing: border-box;
+    font-family: 'Roboto';
+    color: #252525;
+}
+.address-input::placeholder{
+    color: #8596a6;
 }
