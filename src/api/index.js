@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { stat } from 'fs';
-
 
 const GET = 'GET';
 const POST = 'POST';

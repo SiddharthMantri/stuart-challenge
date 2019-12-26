@@ -4,8 +4,9 @@ import { useAsync } from 'react-async-hook';
 import API from '../api';
 
 /**
- * Hook that has a semantic guarantee for exactly one value at any time, something useMemo doesn't guarantee
- * @param {} fn 
+ * Hook that has a semantic guarantee for exactly one value at any time, something 
+ * useMemo doesn't guarantee
+ * @param {} fn
  */
 const useConstant = (fn = () => { }) => {
     const ref = useRef();
@@ -49,7 +50,7 @@ const useDeliveryInput = (initialValue = '') => {
         setAddress(null);
     };
 
-    const debouncedSearch = useConstant((value) => AwesomeDebouncePromise(geoCodeRequest, 1000));
+    const debouncedSearch = useConstant((val) => AwesomeDebouncePromise(geoCodeRequest, 1000));
     const searchResult = useAsync(async () => {
         if (value.length === 0) {
             return {};
