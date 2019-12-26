@@ -111,7 +111,7 @@ const AddressBox = () => {
                 longitude: lng,
                 latitude: lat,
             } = pickupAddress;
-            drawMarker({ type: 'pickup', icon: PickUpBadgePresent, lat, lng });
+            drawMarker({ type: 'pickup', lat, lng });
         }
     }, [pickupAddress]);
     useEffect(() => {
@@ -120,7 +120,7 @@ const AddressBox = () => {
                 longitude: lng,
                 latitude: lat
             } = dropOffAddress;
-            drawMarker({ type: 'dropoff', icon: PickUpBadgePresent, lat, lng });
+            drawMarker({ type: 'dropoff', lat, lng });
         }
     }, [dropOffAddress]);
 

@@ -2,13 +2,14 @@ import axios from 'axios';
 
 const GET = 'GET';
 const POST = 'POST';
+const BASE_URL = 'https://stuart-frontend-challenge.now.sh/';
 
 const request = (method, url, params) => new Promise((resolve, reject) => {
     if (typeof params !== 'object') params = {};
     const options = {
         method,
         url,
-        baseURL: 'https://stuart-frontend-challenge.now.sh/',
+        baseURL: BASE_URL,
         validateStatus: (status) => status >= 200 && status < 300,
         ...params,
     };

@@ -1,13 +1,19 @@
 function GoogleMap(apiKey = '', mapContainer) {
     this.map = null;
     this.markerMap = {};
+    this.apiKey = apiKey;
+    this.markers = [];
+
     const icons = {
         pickup: '../icons/pickUpMarker.svg',
         dropoff: '../icons/dropOffMarker.svg',
     };
-    // private method to draw a map given a map ref
+    /**
+     * Private method to draw a map given a map ref
+     */
     const drawMap = () => {
         const [lat, lng] = [48.8642127, 2.3227858];
+        // Hard-coded map options which can also be passed as options if needed
         this.map = new window.google.maps.Map(
             mapContainer.current, {
                 zoom: 15,
@@ -18,7 +24,7 @@ function GoogleMap(apiKey = '', mapContainer) {
         );
     };
 
-    // private method to load google maps api into a script tag
+    // private method to load google maps api into a script tag into the main html
     const loadScript = (key = '') => {
         if (window.google || this.map !== null) {
             return;
@@ -33,8 +39,11 @@ function GoogleMap(apiKey = '', mapContainer) {
             drawMap();
         });
     };
+    const initialize = (key = '') => {
+        loadScript(key);
+    };
 
-    this.drawMarker = ({ type, icon, lat, lng }) => {
+    this.drawMarker = ({ type, lat, lng }) => {
         const marker = new window.google.maps.Marker({
             position: new window.google.maps.LatLng(lat, lng),
             map: this.map,
@@ -45,13 +54,6 @@ function GoogleMap(apiKey = '', mapContainer) {
         this.markers.push(marker);
         this.markerMap[type] = marker;
     };
-
-    const initialize = (key = '') => {
-        loadScript(key);
-    };
-    initialize(apiKey);
-    this.apiKey = apiKey;
-    this.markers = [];
 
     this.clearMap = () => {
         this.markers.forEach((marker) => {
@@ -67,6 +69,7 @@ function GoogleMap(apiKey = '', mapContainer) {
         }
         return this;
     };
+    initialize(apiKey);
 }
 
 export default GoogleMap;

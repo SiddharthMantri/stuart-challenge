@@ -12,12 +12,14 @@ class AddressError extends Component {
 
     render() {
         if (this.state.hasError) {
-            return <div>
-                <h1>Error in Address Box.</h1>
-                <p>
-                    {this.state.errorMessage}
-                </p>
-            </div>;
+            return (
+                <div>
+                    <h1>Error in Address Box.</h1>
+                    <p>
+                        {this.state.errorMessage}
+                    </p>
+                </div>
+            );
         }
         return this.props.children;
     }
