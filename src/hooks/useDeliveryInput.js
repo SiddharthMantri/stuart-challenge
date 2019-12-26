@@ -3,6 +3,10 @@ import { useCallback, useState, useRef } from 'react';
 import { useAsync } from 'react-async-hook';
 import API from '../api';
 
+/**
+ * Hook that has a semantic guarantee for exactly one value at any time, something useMemo doesn't guarantee
+ * @param {} fn 
+ */
 const useConstant = (fn = () => { }) => {
     const ref = useRef();
     if (!ref.current) {
@@ -60,7 +64,6 @@ const useDeliveryInput = (initialValue = '') => {
             setIsValid(false);
         }
     }, []);
-
     return [value, onChange, isValid, address, onBlur, reset];
 };
 

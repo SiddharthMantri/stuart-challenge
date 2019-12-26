@@ -5,6 +5,7 @@ import useMap from '../hooks/useMap';
 import useToast from '../hooks/useToast';
 
 const Provider = ({ children }) => {
+    // Public methods of GoogleMap class is exposed throughout the app using the useMap hook
     const { state } = useMap('AIzaSyDmvHzsfND8c39HNI95OiahLJ7bRyXBKkA');
     const [open, showToast, closeToast] = useToast();
     const toast = { open, showToast, closeToast };

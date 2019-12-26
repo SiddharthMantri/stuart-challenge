@@ -1,5 +1,9 @@
 import { useState, useCallback } from 'react';
 
+/**
+ * Custom hook for getting state and updating state of the Toast.
+ * Could be easily extended to customize the message in the toast as well
+ */
 const useToast = () => {
     const [open, setOpen] = useState(false);
     const showToast = useCallback(() => {

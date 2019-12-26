@@ -141,7 +141,6 @@ const AddressBox = () => {
     }, [pickup, dropoff]);
 
 
-
     const addressProps = {
         pickup,
         isValidPickup,
