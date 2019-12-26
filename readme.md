@@ -29,6 +29,8 @@ $ npm start
 ```
 This will open a browser at http://localhost:8000/
 
+You could also run: `npx serve -s dist` to run this on http://localhost:5000/
+
 
 ### File Structure
 The `src` folder is composed of 4 main parts of the app - Api, Components, Domain, Hooks, Models and State. 
