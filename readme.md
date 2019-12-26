@@ -33,12 +33,13 @@ You could also run: `npx serve -s dist` to run this on http://localhost:5000/
 
 
 ### File Structure
-The `src` folder is composed of 4 main parts of the app - Api, Components, Domain, Hooks, Models and State. 
+The `src` folder is composed of the main parts of the app - Api, Components, Domain, Hooks, Models and State. 
 
+- api - contains the XHR requests for the UI
 - components - contains the reusable components of the UI markup. 
 - domain - contains the main views that comprise of multiple components and are put together to form the main UI 
 - hooks - contains three custom hooks that hook onto the app state and are used in the state provider.
-- models - contains the GoogleMap view model that are used for the UI.
+- models - contains the GoogleMap view model that is used for the UI.
 - state - contains the provider and context that use the hooks to provide data throughout the component tree.
 
 ### App Structure
