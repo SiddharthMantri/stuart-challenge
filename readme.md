@@ -125,9 +125,12 @@ I feel that I should explain my coding choices for creating this app.
 - useToast.js
     - Really simple stateful hook to display and hide the toast on success. 
     - I use it to pass the state of the toast to the general app and then access it wherever needed.
+- ErrorBoundary
+    - I have created specific ErrorBoundary components for the map and for the AddressBox and I've used these to create error message handling if any error arises.
 
 
 ### Future improvements (Step 5)
 - Have a `loading` state that waits for the GMaps API to load completely
 - Improve the useMaps hook to extend almost all GMaps functionality in to a usable React hook.
     - In general, I would package the MapContainer and useMap hook into a single package and use that in place of any currently available react libraries as that would give me full control over the application and its code
+- Improve Error handling. I would create specific error boundary components for each component as well as larger domain level components that I can then use to have the correct state of the app and any errors be handled correctly.

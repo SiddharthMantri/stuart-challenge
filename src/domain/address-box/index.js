@@ -15,6 +15,7 @@ import DropOffBadgeError from '../../icons/dropOffBadgeError.svg';
 import Context from '../../state/context';
 import API from '../../api';
 import styles from './address.module.css';
+import AddressError from './address.error';
 
 const AddressBoxPresentation = ({ pickup = '', isValidPickup = false, changePickup = () => { }, onPickupBlur = () => { }, dropoff = '', isValidDropOff = false, changeDropoff = () => { }, onDropoffBlur = () => { }, loading = false, handleOnClick = () => { }, disabled = true }) => (
     <Grid container item lg={3} sm={12} xs={12} md={6}>
@@ -154,6 +155,10 @@ const AddressBox = () => {
         handleOnClick,
         disabled,
     };
-    return <AddressBoxPresentation {...addressProps} />;
+    return (
+        <AddressError>
+            <AddressBoxPresentation {...addressProps} />
+        </AddressError>
+    );
 };
 export default AddressBox;
