@@ -16,7 +16,7 @@ function GoogleMap(apiKey = '', mapContainer) {
         // Hard-coded map options which can also be passed as options if needed
         this.map = new window.google.maps.Map(
             mapContainer.current, {
-                zoom: 15,
+                zoom: 14,
                 center: { lat, lng },
                 disableDefaultUI: true,
                 draggable: false,
@@ -45,18 +45,19 @@ function GoogleMap(apiKey = '', mapContainer) {
 
     this.drawMarker = ({ type, lat, lng }) => {
         const index = this.markers.findIndex((marker) => marker.get('type') === type);
-        if (index < 0) {
-            const marker = new window.google.maps.Marker({
-                position: new window.google.maps.LatLng(lat, lng),
-                map: this.map,
-                icon: {
-                    url: icons[type],
-                },
-            });
-            marker.setValues({ type });
-            this.markers = [...this.markers, marker];
-            this.markerMap = { ...this.markerMap, [type]: marker };
+        const marker = new window.google.maps.Marker({
+            position: new window.google.maps.LatLng(lat, lng),
+            map: this.map,
+            icon: {
+                url: icons[type],
+            },
+        });
+        marker.setValues({ type });
+        if (index > -1) {
+            this.clearByType({ type });
         }
+        this.markers = [...this.markers, marker];
+        this.markerMap = { ...this.markerMap, [type]: marker };
         return this.status(this);
     };
 
