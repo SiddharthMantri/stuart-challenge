@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Container, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import AddressBox from '../address-box';
 import MapContainer from '../map-container';
 import Toast from '../toast';
