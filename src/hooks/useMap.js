@@ -27,7 +27,6 @@ const useMap = (key = '') => {
      */
     const update = (fn = () => { }) => (args) => {
         fn(args);
-        // const newState = { ...defaultState };
         const newState = status({ ...defaultState });
         setState({ ...defaultState, ...newState });
     };
