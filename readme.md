@@ -113,6 +113,8 @@ $ npm start
 $ npx cypress open
 ```
 
+If you face errors in downloading cypress through `npm`, you can download and install the client from their website and then run the same commands as above. 
+
 This will open the Cypress application and run the tests in cypress/integration. Cypress can also run in the command line and to see this, you can run `npx cypress run`
 
 ##### Note
