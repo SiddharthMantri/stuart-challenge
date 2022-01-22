@@ -4,7 +4,7 @@ import Context from "./context";
 import useMap from "../hooks/useMap";
 import useToast from "../hooks/useToast";
 
-const API_KEY = "AIzaSyDmvHzsfND8c39HNI95OiahLJ7bRyXBKkA";
+const API_KEY = process.env.API_KEY || "";
 
 const Provider = ({ children }) => {
   // Public methods of GoogleMap class is exposed throughout the app using the useMap hook
@@ -20,7 +20,7 @@ const Provider = ({ children }) => {
 };
 
 Provider.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default Provider;

@@ -31,7 +31,7 @@ const AddressBoxPresentation = ({
   onDropoffBlur = () => {},
   loading = false,
   handleOnClick = () => {},
-  disabled = true
+  disabled = true,
 }) => (
   <Grid container item lg={3} sm={12} xs={12} md={6}>
     <Card>
@@ -106,6 +106,7 @@ const AddressBoxPresentation = ({
     </Card>
   </Grid>
 );
+
 AddressBoxPresentation.propTypes = {
   pickup: PropTypes.string,
   isValidPickup: PropTypes.bool,
@@ -117,7 +118,7 @@ AddressBoxPresentation.propTypes = {
   onDropoffBlur: PropTypes.func,
   loading: PropTypes.bool,
   handleOnClick: PropTypes.func,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
 };
 
 const AddressBox = () => {
@@ -127,7 +128,7 @@ const AddressBox = () => {
     isValidPickup,
     pickupAddress,
     onPickupBlur,
-    resetPickup
+    resetPickup,
   ] = useDeliveryInput("");
   const [
     dropoff,
@@ -135,7 +136,7 @@ const AddressBox = () => {
     isValidDropOff,
     dropOffAddress,
     onDropoffBlur,
-    resetDropOff
+    resetDropOff,
   ] = useDeliveryInput("");
   const [disabled, setDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -149,8 +150,8 @@ const AddressBox = () => {
     setLoading(true);
     API.createJob({
       pickup,
-      dropoff
-    }).then(response => {
+      dropoff,
+    }).then((response) => {
       if (!response.error) {
         showToast();
         setLoading(false);
@@ -217,7 +218,7 @@ const AddressBox = () => {
     onDropoffBlur,
     loading,
     handleOnClick,
-    disabled
+    disabled,
   };
   return (
     <AddressError>
