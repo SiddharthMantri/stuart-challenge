@@ -1,44 +1,76 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "commonjs": true,
-        "node": true
+  "settings": {
+    "react": {
+      "version": "detect"
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "airbnb-base",
-        "plugin:cypress/recommended"
-    ],
-    "parser": "babel-eslint",
-    "parserOptions": {
-        "ecmaVersion": 9,
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "react/react-in-jsx-scope": 0,
-        "no-console": 1,
-        // Indent with 4 spaces
-        "indent": [
-            "error",
-            4
-        ],
-        // Indent JSX with 4 spaces
-        "react/jsx-indent": [
-            "error",
-            4
-        ],
-        // Indent props with 4 spaces
-        "react/jsx-indent-props": [
-            "error",
-            4
-        ],
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
     }
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true,
+    "es6": true
+  },
+  "plugins": ["prettier", "react-hooks", "@typescript-eslint"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "camelcase": ["error", { "allow": ["^UNSAFE_", "_"] }],
+    "import/no-extraneous-dependencies": "off",
+    "import/extensions": "off",
+    "max-classes-per-file": "off",
+    "no-return-assign": ["error", "except-parens"],
+    "no-underscore-dangle": "off",
+    "prettier/prettier": "error",
+    "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
+    // Conflicts with eslint-config-prettier
+    // https://github.com/prettier/eslint-config-prettier/issues/126
+    "react/jsx-curly-newline": "off",
+    "react/jsx-filename-extension": [
+      "error",
+      { "extensions": [".js", ".tsx"] }
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-wrap-multilines": ["error", { "prop": "ignore" }],
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off",
+    "@typescript-eslint/no-explicit-any": "error"
+  },
+  "overrides": [
+    {
+      // Disable the typescript rule for JS files
+      "files": ["*.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "no-use-before-define": "off"
+      }
+    },
+    {
+      // Disable the javascript rule for TS files
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "react/prop-types": "off"
+      }
+    }
+  ]
 }

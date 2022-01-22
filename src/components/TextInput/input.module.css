@@ -1,15 +1,15 @@
-.address-input{
-    border-radius: 4px;
-    height: 32px;
-    background: #f0f3f7;
-    font-size: 16px;
-    border: 0px;
-    outline: none;
-    padding-left: 8px;
-    box-sizing: border-box;
-    font-family: 'Roboto';
-    color: #252525;
+.address-input {
+  border-radius: 4px;
+  height: 32px;
+  background: #f0f3f7;
+  font-size: 16px;
+  border: 0px;
+  outline: none;
+  padding-left: 8px;
+  box-sizing: border-box;
+  font-family: "Roboto";
+  color: #252525;
 }
-.address-input::placeholder{
-    color: #8596a6;
+.address-input::placeholder {
+  color: #8596a6;
 }

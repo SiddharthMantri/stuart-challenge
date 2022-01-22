@@ -1,8 +1,8 @@
-.mapContainer{
-    width:100%;
-    height:100vh;
-    position: absolute;
-    /* position: absolute;
+.mapContainer {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  /* position: absolute;
     top: 0px;
     left: 0px; */
 }

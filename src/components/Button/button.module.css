@@ -1,11 +1,16 @@
-.address-button{
-    height: 40px;
-    border-radius: 4px;
-    background: rgb(16,162,234);
-    background: linear-gradient(90deg, rgba(16,162,234,1) 0%, rgba(15,153,232,1) 100%);
-    box-shadow: 0 1px 2px 0 rgba(16, 162, 234, 0.3), 0 1px 8px 0 rgba(0,0,0,0.1);
-    color: #fff;
-    font-family: "Roboto";
-    font-size: 16px;
-    outline: none;
+.address-button {
+  height: 40px;
+  border-radius: 4px;
+  background: rgb(16, 162, 234);
+  background: linear-gradient(
+    90deg,
+    rgba(16, 162, 234, 1) 0%,
+    rgba(15, 153, 232, 1) 100%
+  );
+  box-shadow: 0 1px 2px 0 rgba(16, 162, 234, 0.3),
+    0 1px 8px 0 rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font-family: "Roboto";
+  font-size: 16px;
+  outline: none;
 }

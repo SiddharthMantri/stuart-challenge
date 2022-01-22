@@ -1,33 +1,37 @@
-import axios from 'axios';
+import axios from "axios";
 
-const GET = 'GET';
-const POST = 'POST';
-const BASE_URL = 'https://stuart-frontend-challenge.now.sh/';
+const GET = "GET";
+const POST = "POST";
+const BASE_URL = "https://stuart-frontend-challenge.now.sh/";
 
-const request = (method, url, params) => new Promise((resolve, reject) => {
-    if (typeof params !== 'object') params = {};
+const request = (method, url, params) =>
+  new Promise((resolve, reject) => {
+    if (typeof params !== "object") params = {};
     const options = {
-        method,
-        url,
-        baseURL: BASE_URL,
-        validateStatus: (status) => status >= 200 && status < 300,
-        ...params,
+      method,
+      url,
+      baseURL: BASE_URL,
+      validateStatus: status => status >= 200 && status < 300,
+      ...params
     };
 
-    axios.request(options).then((response) => {
+    axios
+      .request(options)
+      .then(response => {
         if (response.status === 200) {
-            resolve(response.data);
+          resolve(response.data);
         } else {
-            resolve({ response });
+          resolve({ response });
         }
-    }).catch((error) => {
+      })
+      .catch(error => {
         resolve({ error });
-    });
-});
+      });
+  });
 
 const API = {
-    geocode: async (data) => await request(POST, 'geocode', { data }),
-    createJob: async (data) => await request(POST, 'jobs', { data }),
+  geocode: async data => await request(POST, "geocode", { data }),
+  createJob: async data => await request(POST, "jobs", { data })
 };
 
 export default API;
