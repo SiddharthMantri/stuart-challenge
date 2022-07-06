@@ -12,44 +12,52 @@ module.exports = () => {
     entry: ["babel-polyfill", "./src/index.js"],
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: "index.js"
+      filename: "index.js",
     },
     module: {
       rules: [
         {
+          test: /\.tsx?$/,
+          use: "ts-loader",
+          exclude: /node_modules/,
+        },
+        {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader"
-          }
+            loader: "babel-loader",
+          },
         },
         {
           test: /\.html$/,
-          use: [{ loader: "html-loader" }]
+          use: [{ loader: "html-loader" }],
         },
         {
           test: /\.css$/i,
-          loader: "style-loader!css-loader?modules",
-          exclude: /node_modules/
+          exclude: /node_modules/,
+          use: [
+            "style-loader",
+            {
+              loader: "css-loader",
+              options: {
+                modules: true,
+              },
+            },
+          ],
         },
         {
           test: /\.svg$/,
-          use: ["@svgr/webpack"]
-        }
-      ]
-    },
-    node: {
-      fs: "empty"
+          use: ["@svgr/webpack"],
+        },
+      ],
     },
     mode: isProduction ? "production" : "development",
     devServer: {
-      contentBase: path.join(__dirname, "dist"),
-      publicPath: "http://localhost:8000/",
-      compress: true,
-      port: 8000,
-      hot: true,
-      historyApiFallback: true
+      static: "./client/dist",
+      port: 3000,
+      historyApiFallback: true,
     },
-    devtool: "inline-source-map"
+
+    devtool: "inline-source-map",
   };
 };
