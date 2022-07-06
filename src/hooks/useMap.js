@@ -9,7 +9,7 @@ import GoogleMap from "../models/GoogleMap";
  */
 const useMap = (key = "") => {
   const mapContainer = createRef();
-  const googleMap = useMemo(() => new GoogleMap(key, mapContainer), []);
+  const googleMap = useMemo(() => new GoogleMap(key, mapContainer), [mapContainer]);
   const {
     map,
     apiKey = "",

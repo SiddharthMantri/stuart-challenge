@@ -14,6 +14,9 @@ module.exports = () => {
       path: path.resolve(__dirname, "dist"),
       filename: "index.js",
     },
+    resolve: {
+      extensions: [".tsx", ".ts", ".js"],
+    },
     module: {
       rules: [
         {
@@ -53,7 +56,7 @@ module.exports = () => {
     },
     mode: isProduction ? "production" : "development",
     devServer: {
-      static: "./client/dist",
+      static: "./dist",
       port: 3000,
       historyApiFallback: true,
     },

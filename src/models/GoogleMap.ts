@@ -106,14 +106,16 @@ class GoogleMap {
   apiKey: string;
   markers: Array<any>;
   mapContainer: RefObject<any>;
+
   constructor(apiKey: string, mapContainer: RefObject<any>) {
     this.map = null;
     this.markerMap = new Map();
     this.apiKey = apiKey;
     this.markers = [];
     this.mapContainer = mapContainer;
-    this.loadScript(apiKey);
+    this.loadScript(this.apiKey);
   }
+
   private drawMap() {
     const [lat, lng] = [48.8642127, 2.3227858];
     // Hard-coded map options which can also be passed as options if needed
@@ -169,7 +171,7 @@ class GoogleMap {
   }
 
   clearByType({ type }: { type: string }) {
-    const index = this.markers.findIndex(
+    const index = this.markers?.findIndex(
       (marker) => marker.get("type") === type
     );
     if (index > -1) {
